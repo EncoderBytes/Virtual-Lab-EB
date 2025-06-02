@@ -43,78 +43,6 @@
             background-size: 100%;
         }
 
-        /*  */
-
-        /* #chatbot-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #084568;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            z-index: 1000;
-        }
-
-        #chatbot {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 300px;
-            height: 400px;
-            background: white;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
-            z-index: 1001;
-            display: flex;
-            flex-direction: column;
-        }
-
-        #chatbot-header {
-            background: #084568;
-            color: white;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-        }
-
-        #chatbot-body {
-            padding: 10px;
-            flex: 1;
-            overflow-y: auto;
-            font-family: sans-serif;
-            font-size: 14px;
-            white-space: pre-wrap;
-
-        }
-
-        #chatbot-footer {
-            padding: 10px;
-            border-top: 1px solid #ccc;
-        }
-
-        #prompt {
-            width: 100%;
-            padding: 6px;
-            box-sizing: border-box;
-        }
-
-        #close-chatbot {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-        } */
-
         #chatbot-toggle {
             position: fixed;
             bottom: 20px;
@@ -135,7 +63,6 @@
 
         #chatbot {
             display: none;
-            /* keep only this */
             position: fixed;
             top: 50%;
             left: 50%;
@@ -148,7 +75,7 @@
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
             z-index: 1001;
             flex-direction: column;
-            /* keep flex direction, but no display:flex here */
+
         }
 
 
@@ -163,15 +90,6 @@
             border-top-right-radius: 8px;
         }
 
-        /* #chatbot-body {
-            padding: 10px;
-            flex: 1;
-            overflow-y: auto;
-            font-family: sans-serif;
-            font-size: 14px;
-            white-space: pre-wrap;
-        } */
-
         #chatbot-body {
             padding: 10px;
             flex: 1;
@@ -182,7 +100,7 @@
         }
 
 
-        #chatbot-footer {
+        /* #chatbot-footer {
             padding: 10px;
             border-top: 1px solid #ccc;
             display: flex;
@@ -194,7 +112,7 @@
             flex: 1;
             padding: 6px;
             box-sizing: border-box;
-        }
+        } */
 
         #close-chatbot {
             background: none;
@@ -244,7 +162,209 @@
             gap: 5px;
         }
 
+        /* #language-options {
+            margin-bottom: 10px;
+        } */
 
+        .lang-btn {
+            margin-right: 5px;
+            padding: 6px 12px;
+            font-size: 14px;
+            border-radius: 8px;
+            border: none;
+            background-color: #e0e0e0;
+            cursor: pointer;
+        }
+
+        .lang-btn.active {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .mic-button {
+            font-size: 24px;
+            padding: 10px;
+            border-radius: 50%;
+            border: none;
+            background-color: #e0e0e0;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .mic-button.recording {
+            box-shadow: 0 0 15px 5px red;
+            background-color: #ffcdd2;
+        }
+
+        #voice-status {
+            margin-left: 10px;
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        /*  */
+        /* #chatbot-footer {
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            align-items: flex-start;
+            background-color: #f9f9f9;
+        }
+
+        #prompt {
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-family: sans-serif;
+        }
+
+        .footer-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        #language-options {
+            display: flex;
+            gap: 5px;
+        }
+
+        #voice-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .send-btn {
+            font-size: 18px;
+            border: none;
+            background-color: #084568;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        } */
+
+
+        /* ...existing styles here... */
+
+        /* .lang-popup-btn.active {
+            background-color: #4caf50;
+            color: white;
+            font-weight: bold;
+        } */
+
+        #chatbot-footer {
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background-color: #f9f9f9;
+            position: relative;
+            /* for absolute positioning of popup */
+        }
+
+        #prompt {
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-family: sans-serif;
+        }
+
+        .mic-button {
+            font-size: 20px;
+            padding: 5px;
+            border-radius: 50%;
+            border: none;
+            background-color: #e0e0e0;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        .mic-button.recording {
+            box-shadow: 0 0 15px 5px red;
+            background-color: #ffcdd2;
+        }
+
+        .send-btn {
+            font-size: 18px;
+            border: none;
+            background-color: #084568;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #language-popup {
+            position: absolute;
+            bottom: 60px;
+            /* right above mic */
+            right: -4%;
+            transform: translateX(-50%);
+            background: white;
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            width: 140px;
+            user-select: none;
+            z-index: 100;
+        }
+
+        #language-popup-text {
+            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 13px;
+            font-family: sans-serif;
+        }
+
+        #language-options-popup {
+            display: flex;
+            justify-content: space-around;
+            gap: 5px;
+        }
+
+        .lang-popup-btn {
+            padding: 5px 10px;
+            border-radius: 6px;
+            border: none;
+            background-color: #e0e0e0;
+            cursor: pointer;
+            font-family: sans-serif;
+            font-size: 14px;
+            transition: background-color 0.2s ease;
+        }
+
+        .lang-popup-btn:hover {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .lang-popup-btn.active {
+            background-color: #4caf50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+
+
+        /*  */
         @media screen and (max-width: 600px) {
             #navbarSupportedContent {
 
@@ -341,13 +461,49 @@
         <div id="chatbot-header">
             <img src="./pictures/logomain.png" style="width: 80px;" alt="">
             <button id="close-chatbot">&times;</button>
+
         </div>
         <div id="chatbot-body"></div>
-        <div id="chatbot-footer">
+        <!-- <div id="chatbot-footer">
             <textarea id="prompt" rows="1" placeholder="Type a message..." style="resize: none;" autofocus></textarea>
+            <div id="language-options">
+                <button class="lang-btn" data-lang="ur-PK">اردو</button>
+                <button class="lang-btn" data-lang="ps-AF">Pashto</button>
+                <button class="lang-btn" data-lang="en-US">English</button>
+            </div>
+
+            <div id="voice-container">
+                <button id="voice-btn" class="mic-button">🎤</button>
+                <span id="voice-status">Click mic to speak</span>
+            </div>
+
             <i onclick="askGemini()" class="fa-solid fa-paper-plane"
                 style="font-size: 20px; border: none; background-color: #084568; color: white; padding: 10px; border-radius: 50%; cursor: pointer;"></i>
+        </div> -->
+        <div id="chatbot-footer">
+            <textarea id="prompt" rows="1" placeholder="Type a message..." style="resize: none;" autofocus></textarea>
+
+            <button id="voice-btn" class="mic-button" title="Voice Input">🎤</button>
+
+            <!-- <button onclick="askGemini()" class="send-btn">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button> -->
+            <i onclick="askGemini()" class="fa-solid fa-paper-plane"
+                style="font-size: 20px; border: none; background-color: #084568; color: white; padding: 10px; border-radius: 50%; cursor: pointer;"
+                title="Send"></i>
+
+            <div id="language-popup" class="hidden">
+                <div id="language-popup-text">Choose language</div>
+                <div id="language-options-popup">
+                    <button class="lang-popup-btn" data-lang="ur-PK">اردو</button>
+                    <!-- <button class="lang-popup-btn" data-lang="ps-AF">Pashto</button> -->
+                    <button class="lang-popup-btn" data-lang="en-US">English</button>
+                </div>
+            </div>
         </div>
+
+
+
     </div>
 
 
@@ -760,102 +916,259 @@
             document.getElementById("chatbot").style.display = "none";
         };
 
+
+        // let recognition;
+        // let selectedLanguage = 'en-US';
+
+        // if ('webkitSpeechRecognition' in window) {
+        //     recognition = new webkitSpeechRecognition();
+        // } else if ('SpeechRecognition' in window) {
+        //     recognition = new SpeechRecognition();
+        // } else {
+        //     alert("Speech recognition not supported.");
+        // }
+
+        // if (recognition) {
+        //     recognition.continuous = false;
+        //     recognition.interimResults = false;
+        //     recognition.lang = selectedLanguage;
+
+        //     recognition.onstart = () => {
+        //         document.getElementById("voice-btn").classList.add("recording");
+        //         document.getElementById("voice-status").innerText = "Listening...";
+        //     };
+
+        //     recognition.onend = () => {
+        //         document.getElementById("voice-btn").classList.remove("recording");
+        //         document.getElementById("voice-status").innerText = "Click mic to speak";
+        //     };
+
+        //     recognition.onresult = (event) => {
+        //         const transcript = event.results[0][0].transcript;
+        //         document.getElementById("prompt").value = transcript;
+        //         askGemini(); // Call your existing function
+        //     };
+
+        //     recognition.onerror = (event) => {
+        //         console.error("Speech recognition error:", event.error);
+        //         document.getElementById("voice-status").innerText = "Error. Try again.";
+        //     };
+        // }
+
+        // document.getElementById("voice-btn").addEventListener("click", () => {
+        //     if (recognition) {
+        //         recognition.lang = selectedLanguage;
+        //         recognition.start();
+        //     }
+        // });
+
+        // document.querySelectorAll(".lang-btn").forEach(button => {
+        //     button.addEventListener("click", () => {
+        //         selectedLanguage = button.getAttribute("data-lang");
+        //         document.querySelectorAll(".lang-btn").forEach(btn => btn.classList.remove("active"));
+        //         button.classList.add("active");
+        //     });
+        // });
+        const micButton = document.getElementById("voice-btn");
+        const languagePopup = document.getElementById("language-popup");
+        const languageButtons = document.querySelectorAll(".lang-popup-btn");
+
+        let recognition;
+        let selectedLanguage = null;
+
+        // When mic clicked, toggle showing language options
+        // micButton.addEventListener("click", () => {
+        //     if (languagePopup.classList.contains("hidden")) {
+        //         languagePopup.classList.remove("hidden");
+        //     } else {
+        //         languagePopup.classList.add("hidden");
+        //     }
+        // });
+        micButton.addEventListener("click", () => {
+            if (languagePopup.classList.contains("hidden")) {
+                // Reset any previous selection
+                languageButtons.forEach(btn => btn.classList.remove("active"));
+                selectedLanguage = null;
+
+                // Show options
+                languagePopup.classList.remove("hidden");
+            } else {
+                // Hide if already visible
+                languagePopup.classList.add("hidden");
+            }
+        });
+
+
+        languageButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                // Remove active class from all buttons
+                languageButtons.forEach(btn => btn.classList.remove("active"));
+
+                // Add active to clicked button
+                button.classList.add("active");
+
+                selectedLanguage = button.getAttribute("data-lang");
+
+                // Hide language popup after selection
+                languagePopup.classList.add("hidden");
+
+                // Change mic button to recording style
+                micButton.classList.add("recording");
+
+                // Start speech recognition
+                startRecognition(selectedLanguage);
+            });
+        });
+
+        function startRecognition(lang) {
+            if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+                alert("Speech Recognition not supported in your browser.");
+                micButton.classList.remove("recording");
+                return;
+            }
+
+            if (!recognition) {
+                recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+
+                recognition.onresult = (event) => {
+                    const transcript = event.results[0][0].transcript;
+                    document.getElementById("prompt").value = transcript;
+                    askGemini();
+                };
+
+                recognition.onerror = (event) => {
+                    console.error("Speech recognition error:", event.error);
+                    micButton.classList.remove("recording");
+                };
+
+                recognition.onend = () => {
+                    micButton.classList.remove("recording");
+                };
+            }
+
+            recognition.lang = lang;
+            recognition.start();
+        }
+
+
         // async function askGemini() {
         //     const prompt = document.getElementById("prompt").value;
         //     const responseDisplay = document.getElementById("chatbot-body");
 
         //     if (!prompt.trim()) return;
-
-        //     responseDisplay.textContent += `\nYou: ${prompt}\n`;
-        //     // responseDisplay.innerHTML += `<div><strong>You:${prompt}</strong></div>`;
-        //     const educationKeywords = ["study", "learn", "education", "homework", "math", "science", "history", "biology", "physics", "chemistry", "literature", "college", "school", "exam", "university"];
-        //     const isEducational = educationKeywords.some(keyword => prompt.toLowerCase().includes(keyword));
-
-        //     if (!isEducational) {
-        //         responseDisplay.textContent += "Poha: I'm sorry, I can only help with education-related questions.\n";
-        //         // prompt.value = "";
-        //         document.getElementById("prompt").value = "";
-        //         return;
-        //     }
+        //     const userReply = document.createElement("div");
+        //     userReply.classList.add("message", "user-message");
+        //     userReply.innerHTML = ` ${prompt}`;
+        //     responseDisplay.appendChild(userReply);
 
         //     const result = await fetch(
         //         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
         //         {
         //             method: "POST",
         //             headers: { "Content-Type": "application/json" },
+        //             // body: JSON.stringify({
+        //             //     contents: [{ parts: [{ text: prompt }] }],
+        //             // }),
         //             body: JSON.stringify({
-        //                 contents: [{ parts: [{ text: prompt }] }],
+        //                 contents: [
+        //                     {
+        //                         role: "user",
+        //                         parts: [
+        //                             {
+        //                                 text: "You are an educational assistant. Only answer questions related to education, learning, school subjects, exams, teaching, or academic concepts. If a question is unrelated, politely decline to answer it."
+        //                             }
+        //                         ]
+        //                     },
+        //                     {
+        //                         role: "user",
+        //                         parts: [
+        //                             { text: prompt }
+        //                         ]
+        //                     }
+        //                 ]
         //             }),
+
         //         }
         //     );
 
         //     const data = await result.json();
-        //     console.log(data);
         //     const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response";
-
-        //     // responseDisplay.textContent += `Poha: ${text}\n`;
-        //     // NEW
         //     const html = marked.parse(text);
+
         //     const botReply = document.createElement("div");
-        //     botReply.innerHTML = `<strong>Poha:</strong> ${html}`;
+        //     botReply.classList.add("message", "bot-message");
+        //     botReply.innerHTML = ` ${html}`;
         //     responseDisplay.appendChild(botReply);
 
-
         //     document.getElementById("prompt").value = "";
-        //     // responseDisplay.scrollTop = responseDisplay.scrollHeight;
-        //     const userReply = document.createElement("div");
-        //     userReply.innerHTML = `<strong>You:</strong> ${prompt}`;
-        //     responseDisplay.appendChild(userReply);
-
+        //     responseDisplay.scrollTop = responseDisplay.scrollHeight;
         // }
 
         async function askGemini() {
-            const prompt = document.getElementById("prompt").value;
+            const promptInput = document.getElementById("prompt");
+            const prompt = promptInput.value.trim();
             const responseDisplay = document.getElementById("chatbot-body");
 
-            if (!prompt.trim()) return;
+            if (!prompt) return;
 
-            // Add user message to right side
+            // Show user message
             const userReply = document.createElement("div");
             userReply.classList.add("message", "user-message");
-            userReply.innerHTML = `<strong>You:</strong> ${prompt}`;
+            userReply.innerText = prompt;
             responseDisplay.appendChild(userReply);
 
-            const educationKeywords = ["study", "learn", "education", "homework", "math", "science", "history", "biology", "physics", "chemistry", "literature", "college", "school", "exam", "university"];
-            const isEducational = educationKeywords.some(keyword => prompt.toLowerCase().includes(keyword));
+            // Show loading message
+            const loadingReply = document.createElement("div");
+            loadingReply.classList.add("message", "bot-message");
+            loadingReply.innerHTML = `<em>Loading...</em>`;
+            responseDisplay.appendChild(loadingReply);
 
-            if (!isEducational) {
-                const botReply = document.createElement("div");
-                botReply.classList.add("message", "bot-message");
-                botReply.innerHTML = `<strong>Poha:</strong> I'm sorry, I can only help with education-related questions.`;
-                responseDisplay.appendChild(botReply);
-                document.getElementById("prompt").value = "";
-                return;
+            // Clear input
+            promptInput.value = "";
+            responseDisplay.scrollTop = responseDisplay.scrollHeight;
+
+            try {
+                const result = await fetch(
+                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
+                    {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            contents: [
+                                {
+                                    role: "user",
+                                    parts: [
+                                        {
+                                            text: "You are an educational assistant. Only answer questions related to education, learning, school subjects, exams, teaching, or academic concepts. If a question is unrelated, politely decline to answer it."
+                                        }
+                                    ]
+                                },
+                                {
+                                    role: "user",
+                                    parts: [{ text: prompt }]
+                                }
+                            ]
+                        }),
+                    }
+                );
+
+                const data = await result.json();
+                const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response";
+                const html = marked.parse(text);
+
+                // Replace loading with actual response
+                loadingReply.innerHTML = html;
+            } catch (error) {
+                // Replace loading with error message
+                loadingReply.innerHTML = `<strong>Poha:</strong> Sorry, something went wrong. Please try again later.`;
+                console.error("Gemini API Error:", error);
             }
 
-            const result = await fetch(
-                `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: prompt }] }],
-                    }),
-                }
-            );
-
-            const data = await result.json();
-            const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response";
-            const html = marked.parse(text);
-
-            const botReply = document.createElement("div");
-            botReply.classList.add("message", "bot-message");
-            botReply.innerHTML = `<strong>Poha:</strong> ${html}`;
-            responseDisplay.appendChild(botReply);
-
-            document.getElementById("prompt").value = "";
             responseDisplay.scrollTop = responseDisplay.scrollHeight;
         }
+
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
