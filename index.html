@@ -255,7 +255,7 @@
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             text-align: center;
-            width: 140px;
+            width: 180px;
             user-select: none;
             z-index: 100;
         }
@@ -284,6 +284,24 @@
             transition: background-color 0.2s ease;
         }
 
+        #clear-chat-btn {
+            font-size: 18px;
+            border: none;
+            background-color: red;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 42px;
+            height: 42px;
+        }
+
+        #clear-chat-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+
         .lang-popup-btn:hover {
             background-color: #4caf50;
             color: white;
@@ -294,6 +312,8 @@
             color: white;
             font-weight: bold;
         }
+
+
 
         .hidden {
             display: none;
@@ -401,16 +421,17 @@
         <div id="chatbot-footer">
             <textarea id="prompt" rows="1" placeholder="Type a message..." style="resize: none;" autofocus></textarea>
 
-            <button id="voice-btn" class="mic-button" title="Voice Input">🎤</button>
+            <button id="voice-btn" class="mic-button" title="Hold Ctrl & click to change language">🎤</button>
 
             <i onclick="askGemini()" class="fa-solid fa-paper-plane"
                 style="font-size: 20px; border: none; background-color: #084568; color: white; padding: 10px; border-radius: 50%; cursor: pointer;"
                 title="Send"></i>
+            <button id="clear-chat-btn" title="Clear Chat" disabled><i class="fa-solid fa-trash"></i></button>
 
             <div id="language-popup" class="hidden">
                 <div id="language-popup-text">Choose language</div>
                 <div id="language-options-popup">
-                    <!-- <button class="lang-popup-btn" data-lang="ps-AF">پښتو</button> -->
+                    <button class="lang-popup-btn" data-lang="ps-PK">پښتو</button>
                     <button class="lang-popup-btn" data-lang="ur-PK">اردو</button>
                     <button class="lang-popup-btn" data-lang="en-US">English</button>
                 </div>
@@ -832,34 +853,104 @@
 
         let recognition;
         let selectedLanguage = null;
-        micButton.addEventListener("click", () => {
-            if (languagePopup.classList.contains("hidden")) {
+        // micButton.addEventListener("click", () => {
+        //     if (languagePopup.classList.contains("hidden")) {
 
-                languageButtons.forEach(btn => btn.classList.remove("active"));
+        //         languageButtons.forEach(btn => btn.classList.remove("active"));
+        //         selectedLanguage = null;
+
+        //         languagePopup.classList.remove("hidden");
+        //     } else {
+        //         languagePopup.classList.add("hidden");
+        //     }
+        // });
+        // micButton.addEventListener("click", () => {
+
+        //     // If already recording, ignore further clicks
+        //     if (micButton.classList.contains("recording")) return;
+
+        //     if (selectedLanguage) {
+        //         // Language already selected: start recognition directly
+        //         micButton.classList.add("recording");
+        //         startRecognition(selectedLanguage);
+        //     } else {
+        //         // First time: show popup to choose language
+        //         languageButtons.forEach(btn => btn.classList.remove("active"));
+        //         languagePopup.classList.remove("hidden");
+        //     }
+        // });
+
+        micButton.addEventListener("click", (e) => {
+            // Reset language if Ctrl key is held
+            // if (e.ctrlKey || e.shiftKey) {
+            //     selectedLanguage = null;
+            // }
+            if (e.ctrlKey || e.shiftKey) {
                 selectedLanguage = null;
+                languageButtons.forEach(btn => btn.classList.remove("active"));
+            }
 
-                languagePopup.classList.remove("hidden");
+
+            if (micButton.classList.contains("recording")) return;
+
+            if (selectedLanguage) {
+                micButton.classList.add("recording");
+                startRecognition(selectedLanguage);
             } else {
-                languagePopup.classList.add("hidden");
+                languageButtons.forEach(btn => btn.classList.remove("active"));
+                languagePopup.classList.remove("hidden");
             }
         });
 
 
+
+
+        // languageButtons.forEach(button => {
+        //     button.addEventListener("click", () => {
+        //         languageButtons.forEach(btn => btn.classList.remove("active"));
+
+        //         button.classList.add("active");
+
+        //         selectedLanguage = button.getAttribute("data-lang");
+
+        //         languagePopup.classList.add("hidden");
+
+        //         micButton.classList.add("recording");
+
+        //         startRecognition(selectedLanguage);
+        //     });
+        // });
+
+        // languageButtons.forEach(button => {
+        //     button.addEventListener("click", () => {
+        //         languageButtons.forEach(btn => btn.classList.remove("active"));
+        //         button.classList.add("active");
+
+        //         selectedLanguage = button.getAttribute("data-lang");
+        //         languagePopup.classList.add("hidden");
+
+        //         micButton.classList.add("recording");
+        //         startRecognition(selectedLanguage);
+        //     });
+        // });
+
         languageButtons.forEach(button => {
             button.addEventListener("click", () => {
+                // Remove active class from all
                 languageButtons.forEach(btn => btn.classList.remove("active"));
 
-                button.classList.add("active");
-
+                // Set selected language and keep it green
                 selectedLanguage = button.getAttribute("data-lang");
+                button.classList.add("active");
 
                 languagePopup.classList.add("hidden");
 
                 micButton.classList.add("recording");
-
                 startRecognition(selectedLanguage);
             });
         });
+
+
 
         function startRecognition(lang) {
             if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
@@ -893,22 +984,43 @@
             recognition.start();
         }
 
+        const chatBody = document.getElementById("chatbot-body");
+        const clearChatBtn = document.getElementById("clear-chat-btn");
+        clearChatBtn.onclick = () => {
+            if (chatBody.children.length > 0) {
+                chatBody.innerHTML = "";
+                updateClearButtonState();
+            }
+        };
+
+        function updateClearButtonState() {
+            clearChatBtn.disabled = chatBody.children.length === 0;
+        }
+
         async function askGemini() {
             const promptInput = document.getElementById("prompt");
             const prompt = promptInput.value.trim();
             const responseDisplay = document.getElementById("chatbot-body");
 
             if (!prompt) return;
+
+            // Add user message
             const userReply = document.createElement("div");
             userReply.classList.add("message", "user-message");
             userReply.innerText = prompt;
             responseDisplay.appendChild(userReply);
+
+            // Add loading message
             const loadingReply = document.createElement("div");
             loadingReply.classList.add("message", "bot-message");
             loadingReply.innerHTML = `<em>Loading...</em>`;
             responseDisplay.appendChild(loadingReply);
+
             promptInput.value = "";
             responseDisplay.scrollTop = responseDisplay.scrollHeight;
+
+            // Update clear button state
+            updateClearButtonState();
 
             try {
                 const result = await fetch(
@@ -925,7 +1037,6 @@
                                             text: `You are an educational assistant that helps users with questions related to education, learning, school subjects, exams, teaching, or academic concepts.
 You may receive questions in different languages, including Pashto. If the question is educational, provide a helpful and clear answer in the same language. If the question is unrelated to education, politely decline.`
                                         }
-
                                     ]
                                 },
                                 {
@@ -941,29 +1052,24 @@ You may receive questions in different languages, including Pashto. If the quest
                 const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response";
                 const html = marked.parse(text);
 
-                // Replace loading with actual response
-                // loadingReply.innerHTML = html;
                 loadingReply.innerHTML = `
-    <div class="response-text">${html}</div>
-    <button class="copy-btn" title="Copy to clipboard">📋</button>
-`;
+            <div class="response-text">${html}</div>
+            <button class="copy-btn" title="Copy to clipboard">📋</button>
+        `;
 
-                // Add copy functionality
                 const copyBtn = loadingReply.querySelector(".copy-btn");
                 copyBtn.addEventListener("click", () => {
                     const plainText = loadingReply.querySelector(".response-text").innerText;
-                    navigator.clipboard.writeText(plainText).then(() => {
-                        alert("Response copied to clipboard!");
-                    });
+                    navigator.clipboard.writeText(plainText);
                 });
 
             } catch (error) {
-                // Replace loading with error message
                 loadingReply.innerHTML = `<strong>Poha:</strong> Sorry, something went wrong. Please try again later.`;
                 console.error("Gemini API Error:", error);
             }
 
             responseDisplay.scrollTop = responseDisplay.scrollHeight;
+            updateClearButtonState();
         }
 
     </script>
