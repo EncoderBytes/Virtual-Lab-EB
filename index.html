@@ -412,11 +412,26 @@
 
     <button id="chatbot-toggle">Chat with <img src="./pictures/logomain.png" style="width: 50px;" alt=""></button>
     <div id="chatbot">
-        <div id="chatbot-header">
+        <!-- <div id="chatbot-header">
             <img src="./pictures/logomain.png" style="width: 80px;" alt="">
             <button id="close-chatbot">&times;</button>
 
+        </div> -->
+
+        <div id="chatbot-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center;">
+                <img src="./pictures/logomain.png" style="width: 80px;" alt="">
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <div id="language-buttons" style="margin-left: 10px;">
+                    <button class="lang-btn" data-lang="ur-PK">اردو</button>
+                    <button class="lang-btn" data-lang="en-US">English</button>
+                    <button class="lang-btn" data-lang="ps-PK">پښتو</button>
+                </div>
+                <button id="close-chatbot">&times;</button>
+            </div>
         </div>
+
         <div id="chatbot-body"></div>
         <div id="chatbot-footer">
             <textarea id="prompt" rows="1" placeholder="Type a message..." style="resize: none;" autofocus></textarea>
@@ -427,15 +442,6 @@
                 style="font-size: 20px; border: none; background-color: #084568; color: white; padding: 10px; border-radius: 50%; cursor: pointer;"
                 title="Send"></i>
             <button id="clear-chat-btn" title="Clear Chat" disabled><i class="fa-solid fa-trash"></i></button>
-
-            <div id="language-popup" class="hidden">
-                <div id="language-popup-text">Choose language</div>
-                <div id="language-options-popup">
-                    <button class="lang-popup-btn" data-lang="ps-PK">پښتو</button>
-                    <button class="lang-popup-btn" data-lang="ur-PK">اردو</button>
-                    <button class="lang-popup-btn" data-lang="en-US">English</button>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -569,7 +575,6 @@
 
             </div>
         </div>
-
 
         <!-- Describtion -->
         <section class="position-relative">
@@ -734,9 +739,6 @@
                     height:auto; z-index:-1;" class="" alt="">
             </div>
         </section>
-
-
-
     </div>
 
     <footer class="text-lg-start text-white" id="footer"
@@ -849,7 +851,9 @@
 
         const micButton = document.getElementById("voice-btn");
         const languagePopup = document.getElementById("language-popup");
-        const languageButtons = document.querySelectorAll(".lang-popup-btn");
+        // const languageButtons = document.querySelectorAll(".lang-popup-btn");
+        const languageButtons = document.querySelectorAll(".lang-btn");
+
 
         let recognition;
         let selectedLanguage = null;
@@ -880,29 +884,41 @@
         //     }
         // });
 
+        // micButton.addEventListener("click", (e) => {
+        //     if (e.ctrlKey || e.shiftKey) {
+        //         selectedLanguage = null;
+        //         languageButtons.forEach(btn => btn.classList.remove("active"));
+        //     }
+
+
+        //     if (micButton.classList.contains("recording")) return;
+
+        //     if (selectedLanguage) {
+        //         micButton.classList.add("recording");
+        //         startRecognition(selectedLanguage);
+        //     } else {
+        //         languageButtons.forEach(btn => btn.classList.remove("active"));
+        //         languagePopup.classList.remove("hidden");
+        //     }
+        // });
+
         micButton.addEventListener("click", (e) => {
-            // Reset language if Ctrl key is held
-            // if (e.ctrlKey || e.shiftKey) {
-            //     selectedLanguage = null;
-            // }
+            if (micButton.classList.contains("recording")) return;
+
             if (e.ctrlKey || e.shiftKey) {
                 selectedLanguage = null;
                 languageButtons.forEach(btn => btn.classList.remove("active"));
+                alert("Please select a new language from the top.");
+                return;
             }
-
-
-            if (micButton.classList.contains("recording")) return;
 
             if (selectedLanguage) {
                 micButton.classList.add("recording");
                 startRecognition(selectedLanguage);
             } else {
-                languageButtons.forEach(btn => btn.classList.remove("active"));
-                languagePopup.classList.remove("hidden");
+                alert("Please select a language from the top before using voice input.");
             }
         });
-
-
 
 
         // languageButtons.forEach(button => {
@@ -943,7 +959,7 @@
                 selectedLanguage = button.getAttribute("data-lang");
                 button.classList.add("active");
 
-                languagePopup.classList.add("hidden");
+                // languagePopup.classList.add("hidden");
 
                 micButton.classList.add("recording");
                 startRecognition(selectedLanguage);
